@@ -1,0 +1,72 @@
+---
+title: "usgs-data"
+format: html
+editor: visual
+editor_options: 
+  chunk_output_type: console
+---
+
+```{r}
+library(tidyverse)
+library(dataRetrieval)
+```
+
+```{r}
+# Set Parameters for the Query
+siteNumber <- "11118500"
+parameterCd <- "00060" # Discharge
+startDate <- "2023-08-19"
+endDate <- "2023-08-22"
+```
+
+```{r}
+discharge <- readNWISdv(siteNumber, parameterCd, startDate, endDate)
+```
+
+```{r}
+ggplot(data=discharge, aes(x=Date, y=X_00060_00003)) + 
+  geom_line()
+
+max_discharge <- max(discharge$X_00060_00003)
+```
+
+```{r}
+# Set Parameters for the Query BONUS QUERY
+siteNumber <- "11118500"
+parameterCd <- "00060" # Discharge
+startDate <- "2023-01-05"
+endDate <- "2023-01-20"
+
+discharge2 <- readNWISdv(siteNumber, parameterCd, startDate, endDate)
+```
+
+```{r}
+ggplot(data=discharge2, aes(x=Date, y=X_00060_00003)) + 
+  geom_point() +
+  geom_line()
+
+max_discharge <- max(discharge2$X_00060_00003)
+```
+
+###
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
